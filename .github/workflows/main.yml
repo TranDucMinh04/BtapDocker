@@ -8,21 +8,21 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
-      # 1. Action lấy code từ Github (Checkout)
+      # 1. Action lấy code từ Github
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
-      # 2. Action Đăng nhập Docker Hub (Docker Login)
+      # 2. Action Đăng nhập Docker Hub
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # 3. Action Đóng gói & Đẩy Image (Build and push Docker images)
+      # 3. Action Đóng gói & Đẩy Image
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: tranducminh1502/btdocker:v1
+          tags: ${{ secrets.DOCKER_USERNAME }}/btdocker:latest
